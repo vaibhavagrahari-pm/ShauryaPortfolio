@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shaurya Pratap Singh — Creative Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a08;
+  --bg2: #111110;
+  --bg3: #1a1a18;
+  --cream: #f0ead6;
+  --gold: #c8a96e;
+  --gold2: #e8c98e;
+  --muted: #6b6b60;
+  --border: rgba(200,169,110,0.15);
+  --ff-head: 'Bebas Neue', sans-serif;
+  --ff-serif: 'DM Serif Display', serif;
+  --ff-body: 'DM Sans', sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--cream);
+  font-family: var(--ff-body);
+  font-weight: 300;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* Custom cursor */
+.cursor {
+  width: 8px; height: 8px;
+  background: var(--gold);
+  border-radius: 50%;
+  position: fixed; top: 0; left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.1s;
+}
+.cursor-ring {
+  width: 32px; height: 32px;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  position: fixed; top: 0; left: 0;
+  pointer-events: none;
+  z-index: 9998;
+  transition: transform 0.15s, width 0.2s, height 0.2s, opacity 0.2s;
+  opacity: 0.5;
+}
+
+/* Nav */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 1.5rem 4rem;
+  display: flex; align-items: center; justify-content: space-between;
+  background: linear-gradient(to bottom, rgba(10,10,8,0.95), transparent);
+}
+.nav-logo {
+  font-family: var(--ff-head);
+  font-size: 1.4rem;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+}
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a {
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--cream); }
+
+/* Hero */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  position: relative;
+  overflow: hidden;
+}
+.hero-left {
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 8rem 4rem 5rem;
+  position: relative; z-index: 2;
+}
+.hero-tag {
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.2s forwards;
+}
+.hero-name {
+  font-family: var(--ff-head);
+  font-size: clamp(4rem, 8vw, 9rem);
+  line-height: 0.9;
+  letter-spacing: 0.02em;
+  color: var(--cream);
+  opacity: 0;
+  animation: fadeUp 0.8s 0.35s forwards;
+}
+.hero-name span { color: var(--gold); }
+.hero-role {
+  font-family: var(--ff-serif);
+  font-style: italic;
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  color: var(--muted);
+  margin-top: 1.5rem;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.5s forwards;
+}
+.hero-cta {
+  margin-top: 3rem;
+  display: flex; gap: 1rem;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.65s forwards;
+}
+.btn-primary {
+  padding: 0.85rem 2rem;
+  background: var(--gold);
+  color: var(--bg);
+  font-family: var(--ff-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none; cursor: none;
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-primary:hover { background: var(--gold2); transform: translateY(-2px); }
+.btn-outline {
+  padding: 0.85rem 2rem;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-family: var(--ff-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: none;
+  transition: border-color 0.2s, color 0.2s;
+}
+.btn-outline:hover { border-color: var(--gold); color: var(--cream); }
+
+.hero-right {
+  position: relative;
+  display: flex; align-items: flex-end; justify-content: flex-end;
+}
+.hero-visual {
+  width: 100%; height: 100%;
+  background: var(--bg2);
+  position: relative; overflow: hidden;
+}
+.hero-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(200,169,110,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200,169,110,0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+.hero-circle {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+}
+.hero-circle:nth-child(2) { width: 300px; height: 300px; top: 20%; right: 10%; animation: spin 20s linear infinite; }
+.hero-circle:nth-child(3) { width: 500px; height: 500px; top: 5%; right: -10%; animation: spin 35s linear infinite reverse; }
+.hero-circle:nth-child(4) { width: 160px; height: 160px; bottom: 20%; right: 25%; animation: spin 15s linear infinite; }
+.hero-initials {
+  position: absolute; bottom: 5rem; left: 4rem;
+  font-family: var(--ff-head);
+  font-size: 12rem;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(200,169,110,0.15);
+  letter-spacing: -0.02em;
+  user-select: none;
+}
+.hero-stats {
+  position: absolute; top: 40%; right: 3rem;
+  display: flex; flex-direction: column; gap: 2rem;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.9s forwards;
+}
+.stat { text-align: right; }
+.stat-num {
+  font-family: var(--ff-head);
+  font-size: 2.5rem;
+  color: var(--gold);
+  line-height: 1;
+}
+.stat-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 0.25rem;
+}
+.hero-scroll {
+  position: absolute; bottom: 3rem; left: 50%;
+  transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+  font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--muted);
+  opacity: 0;
+  animation: fadeUp 0.8s 1.1s forwards;
+}
+.scroll-line {
+  width: 1px; height: 50px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  animation: scrollLine 2s ease-in-out infinite;
+}
+
+/* Sections */
+section { padding: 6rem 4rem; }
+.section-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1rem;
+}
+.section-title {
+  font-family: var(--ff-head);
+  font-size: clamp(2.5rem, 5vw, 5rem);
+  line-height: 0.95;
+  letter-spacing: 0.02em;
+  color: var(--cream);
+  margin-bottom: 3rem;
+}
+
+/* About */
+#about {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: center;
+  border-top: 1px solid var(--border);
+}
+.about-text p {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+}
+.about-text p strong { color: var(--cream); font-weight: 400; }
+.about-right { display: flex; flex-direction: column; gap: 1.5rem; }
+.skill-group { }
+.skill-group-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.skill-tag {
+  font-size: 0.75rem;
+  padding: 0.35rem 0.85rem;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  letter-spacing: 0.05em;
+  transition: border-color 0.2s, color 0.2s;
+}
+.skill-tag:hover { border-color: var(--gold); color: var(--cream); }
+
+/* Services */
+#services { background: var(--bg2); border-top: 1px solid var(--border); }
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+.service-card {
+  background: var(--bg2);
+  padding: 2.5rem 2rem;
+  transition: background 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.service-card::before {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transition: transform 0.3s;
+  transform-origin: left;
+}
+.service-card:hover::before { transform: scaleX(1); }
+.service-card:hover { background: var(--bg3); }
+.service-num {
+  font-family: var(--ff-head);
+  font-size: 3rem;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--border);
+  line-height: 1;
+  margin-bottom: 1.5rem;
+}
+.service-title {
+  font-family: var(--ff-serif);
+  font-size: 1.3rem;
+  color: var(--cream);
+  margin-bottom: 0.75rem;
+}
+.service-desc {
+  font-size: 0.85rem;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+/* Projects */
+#projects { border-top: 1px solid var(--border); }
+.projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.project-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  padding: 2.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.project-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+.project-card.featured {
+  grid-column: span 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+.project-year {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1rem;
+}
+.project-title {
+  font-family: var(--ff-head);
+  font-size: 2rem;
+  letter-spacing: 0.03em;
+  color: var(--cream);
+  margin-bottom: 0.75rem;
+  line-height: 1.1;
+}
+.project-tech {
+  display: flex; flex-wrap: wrap; gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+.tech-tag {
+  font-size: 0.65rem;
+  padding: 0.25rem 0.6rem;
+  background: rgba(200,169,110,0.08);
+  color: var(--gold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.project-desc {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--muted);
+}
+.project-visual {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  height: 200px;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.project-visual-text {
+  font-family: var(--ff-head);
+  font-size: 5rem;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(200,169,110,0.2);
+  user-select: none;
+}
+.project-visual.featured { height: 280px; }
+
+/* Experience */
+#experience { background: var(--bg2); border-top: 1px solid var(--border); }
+.timeline { position: relative; }
+.timeline::before {
+  content: '';
+  position: absolute; left: 0; top: 0; bottom: 0;
+  width: 1px;
+  background: var(--border);
+}
+.timeline-item {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 3rem;
+  padding: 2.5rem 0 2.5rem 0;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+.timeline-item::before {
+  content: '';
+  position: absolute; left: -4px; top: 2.8rem;
+  width: 8px; height: 8px;
+  background: var(--gold);
+  border-radius: 50%;
+}
+.tl-date {
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  padding-top: 0.25rem;
+  padding-left: 1.5rem;
+}
+.tl-role {
+  font-family: var(--ff-serif);
+  font-size: 1.3rem;
+  color: var(--cream);
+  margin-bottom: 0.25rem;
+}
+.tl-company { font-size: 0.8rem; color: var(--gold); margin-bottom: 1rem; letter-spacing: 0.08em; }
+.tl-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+.tl-bullets li {
+  font-size: 0.875rem;
+  color: var(--muted);
+  line-height: 1.6;
+  padding-left: 1rem;
+  position: relative;
+}
+.tl-bullets li::before {
+  content: '—';
+  position: absolute; left: 0;
+  color: var(--gold);
+}
+
+/* Achievements */
+#achievements { border-top: 1px solid var(--border); }
+.ach-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+.ach-card {
+  background: var(--bg);
+  padding: 2rem 1.5rem;
+  transition: background 0.2s;
+}
+.ach-card:hover { background: var(--bg3); }
+.ach-icon {
+  font-family: var(--ff-head);
+  font-size: 2rem;
+  color: var(--gold);
+  margin-bottom: 1rem;
+  line-height: 1;
+}
+.ach-title {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--cream);
+  margin-bottom: 0.4rem;
+}
+.ach-sub { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
+
+/* Contact */
+#contact {
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+  text-align: center;
+  padding: 8rem 4rem;
+}
+.contact-big {
+  font-family: var(--ff-head);
+  font-size: clamp(3rem, 8vw, 8rem);
+  color: var(--cream);
+  letter-spacing: 0.02em;
+  line-height: 0.9;
+  margin-bottom: 2rem;
+}
+.contact-big span { color: var(--gold); }
+.contact-email {
+  font-family: var(--ff-serif);
+  font-style: italic;
+  font-size: 1.2rem;
+  color: var(--muted);
+  margin-bottom: 2.5rem;
+}
+.contact-links { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
+.contact-link {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  padding-bottom: 2px;
+  border-bottom: 1px solid var(--border);
+  transition: color 0.2s, border-color 0.2s;
+}
+.contact-link:hover { color: var(--gold); border-color: var(--gold); }
+
+/* Footer */
+footer {
+  padding: 2rem 4rem;
+  display: flex; justify-content: space-between; align-items: center;
+  border-top: 1px solid var(--border);
+}
+.footer-copy { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.1em; }
+.footer-brand {
+  font-family: var(--ff-head);
+  font-size: 1rem;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+}
+
+/* Animations */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes scrollLine {
+  0%, 100% { opacity: 0.3; transform: scaleY(1); }
+  50% { opacity: 1; transform: scaleY(1.2); }
+}
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 900px) {
+  nav { padding: 1.5rem 2rem; }
+  .nav-links { display: none; }
+  .hero { grid-template-columns: 1fr; }
+  .hero-right { display: none; }
+  .hero-left { padding: 7rem 2rem 4rem; }
+  section { padding: 4rem 2rem; }
+  #about { grid-template-columns: 1fr; gap: 3rem; }
+  .services-grid { grid-template-columns: 1fr; }
+  .projects-grid { grid-template-columns: 1fr; }
+  .project-card.featured { grid-column: span 1; grid-template-columns: 1fr; }
+  .ach-grid { grid-template-columns: 1fr 1fr; }
+  .timeline-item { grid-template-columns: 1fr; gap: 0.5rem; }
+  footer { flex-direction: column; gap: 1rem; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav>
+  <div class="nav-logo">SPS</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-left">
+    <div class="hero-tag">Creative Professional &amp; Developer</div>
+    <h1 class="hero-name">SHAURYA<br><span>PRATAP</span><br>SINGH</h1>
+    <p class="hero-role">Video Editor · Graphic Designer · Full-Stack Developer</p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn-primary">View Work</a>
+      <a href="#contact" class="btn-outline">Get In Touch</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-visual">
+      <div class="hero-grid"></div>
+      <div class="hero-circle"></div>
+      <div class="hero-circle"></div>
+      <div class="hero-circle"></div>
+      <div class="hero-initials">SPS</div>
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-num">15+</div>
+          <div class="stat-label">Videos / Month</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">40%</div>
+          <div class="stat-label">CTR Improvement</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">50K+</div>
+          <div class="stat-label">Followers Reached</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">20+</div>
+          <div class="stat-label">Projects · 5★ Rated</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    Scroll
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-left">
+    <div class="section-label">About Me</div>
+    <h2 class="section-title reveal">WHERE<br>DESIGN<br>MEETS CODE</h2>
+    <div class="about-text reveal">
+      <p>I'm a <strong>multidisciplinary creative</strong> based in Kanpur, India — a rare blend of video editor, graphic designer, and full-stack developer. I don't just make things look good; I make them work.</p>
+      <p>With <strong>3+ years of freelance experience</strong>, I've helped YouTube creators grow their audiences, built brands from scratch, and shipped web applications used by hundreds of active users.</p>
+      <p>Currently pursuing a <strong>BA Psychology at FLAME University</strong> (GPA 3.8), I bring a human-centred perspective to every creative and technical challenge.</p>
+    </div>
+  </div>
+  <div class="about-right reveal">
+    <div class="skill-group">
+      <div class="skill-group-label">Video & Motion</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Premiere Pro</span>
+        <span class="skill-tag">After Effects</span>
+        <span class="skill-tag">DaVinci Resolve</span>
+        <span class="skill-tag">Final Cut Pro</span>
+        <span class="skill-tag">Motion Graphics</span>
+        <span class="skill-tag">CapCut</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-label">Design</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Photoshop</span>
+        <span class="skill-tag">Illustrator</span>
+        <span class="skill-tag">Figma</span>
+        <span class="skill-tag">InDesign</span>
+        <span class="skill-tag">Canva</span>
+        <span class="skill-tag">CorelDRAW</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-label">Development</div>
+      <div class="skill-tags">
+        <span class="skill-tag">React</span>
+        <span class="skill-tag">Node.js</span>
+        <span class="skill-tag">JavaScript</span>
+        <span class="skill-tag">MongoDB</span>
+        <span class="skill-tag">PostgreSQL</span>
+        <span class="skill-tag">HTML5 / CSS3</span>
+        <span class="skill-tag">Express</span>
+        <span class="skill-tag">Firebase</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-label">Platforms & Tools</div>
+      <div class="skill-tags">
+        <span class="skill-tag">WordPress</span>
+        <span class="skill-tag">Webflow</span>
+        <span class="skill-tag">Vercel</span>
+        <span class="skill-tag">Netlify</span>
+        <span class="skill-tag">Git / GitHub</span>
+        <span class="skill-tag">Stripe API</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-label">What I Do</div>
+  <h2 class="section-title reveal">SERVICES</h2>
+  <div class="services-grid reveal">
+    <div class="service-card">
+      <div class="service-num">01</div>
+      <div class="service-title">Video Editing</div>
+      <div class="service-desc">High-retention video production for YouTube creators and brands. From vlogs and commercials to short-form Reels and Shorts — editing that keeps audiences watching. Averaging 35% viewer retention improvement for clients.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-num">02</div>
+      <div class="service-title">Graphic Design & Thumbnails</div>
+      <div class="service-desc">Brand identity, thumbnail design, social media graphics, and marketing collateral. CTR-optimised thumbnails delivering 40% above-average click-through rates. Adobe Certified Professional in Photoshop.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-num">03</div>
+      <div class="service-title">Motion Graphics</div>
+      <div class="service-desc">Animated intros, outros, lower thirds, title sequences, and branded motion content using After Effects and Premiere Pro. Making your content impossible to scroll past.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-num">04</div>
+      <div class="service-title">Web Development</div>
+      <div class="service-desc">Full-stack web applications built with React, Node.js, and modern JavaScript. From portfolio sites to e-commerce platforms with secure payment processing — clean code with strong design instincts.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-num">05</div>
+      <div class="service-title">Social Media Management</div>
+      <div class="service-desc">Multi-platform strategy, content creation, and analytics-driven growth across YouTube, Instagram, and Facebook. Grew combined audience to 50K+ followers with 60% engagement improvement.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-num">06</div>
+      <div class="service-title">UI/UX Design</div>
+      <div class="service-desc">Figma wireframes, prototypes, and design systems. Translating ideas into polished, user-friendly interfaces. Bringing a designer's eye to every digital product I build or contribute to.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">Selected Work</div>
+  <h2 class="section-title reveal">PROJECTS</h2>
+  <div class="projects-grid">
+
+    <div class="project-card featured reveal">
+      <div>
+        <div class="project-year">2021</div>
+        <div class="project-title">PORTFOLIO WEBSITE</div>
+        <div class="project-tech">
+          <span class="tech-tag">React</span>
+          <span class="tech-tag">Node.js</span>
+          <span class="tech-tag">MongoDB</span>
+          <span class="tech-tag">Tailwind CSS</span>
+        </div>
+        <div class="project-desc">Full-stack portfolio with dynamic content management, contact form with backend API, email notification system, and fully responsive design optimised across all devices and screen sizes.</div>
+      </div>
+      <div class="project-visual featured">
+        <div class="project-visual-text">WEB</div>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-year">2021</div>
+      <div class="project-title">YOUTUBE THUMBNAIL GENERATOR</div>
+      <div class="project-tech">
+        <span class="tech-tag">React</span>
+        <span class="tech-tag">Canvas API</span>
+        <span class="tech-tag">Firebase</span>
+      </div>
+      <div class="project-desc">Web app for creating custom YouTube thumbnails with preset templates, drag-and-drop editor, text overlays, and one-click export. Reached 500+ active users within the first month of launch.</div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-year">2022</div>
+      <div class="project-title">E-COMMERCE PLATFORM</div>
+      <div class="project-tech">
+        <span class="tech-tag">React</span>
+        <span class="tech-tag">Express</span>
+        <span class="tech-tag">Stripe API</span>
+        <span class="tech-tag">PostgreSQL</span>
+      </div>
+      <div class="project-desc">Full-featured online store with shopping cart, user authentication, and secure Stripe payment processing. Custom UI/UX with admin dashboard for inventory and order management.</div>
+    </div>
+
+    <div class="project-card featured reveal" style="grid-column: span 2;">
+      <div>
+        <div class="project-year">2025</div>
+        <div class="project-title">VIDEO EDITING<br>SHOWCASE REEL</div>
+        <div class="project-tech">
+          <span class="tech-tag">Premiere Pro</span>
+          <span class="tech-tag">After Effects</span>
+          <span class="tech-tag">Motion Graphics</span>
+        </div>
+        <div class="project-desc">Comprehensive portfolio reel spanning vlogs, commercials, and short-form content. Custom motion graphics, complex transitions, and visual effects demonstrating versatility across content formats and styles. Available on request.</div>
+      </div>
+      <div class="project-visual featured">
+        <div class="project-visual-text">REEL</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">Background</div>
+  <h2 class="section-title reveal">EXPERIENCE</h2>
+  <div class="timeline reveal">
+
+    <div class="timeline-item">
+      <div class="tl-date">2022 — Present</div>
+      <div>
+        <div class="tl-role">Video Editor, Graphic Designer &amp; Developer</div>
+        <div class="tl-company">Freelance · Remote</div>
+        <ul class="tl-bullets">
+          <li>15+ high-quality videos monthly — avg. 35% viewer retention increase</li>
+          <li>40% CTR improvement through optimised thumbnail design</li>
+          <li>Brand identity packages for 10+ clients: logos, colour systems, collateral</li>
+          <li>React + Node.js web applications for clients across industries</li>
+          <li>5-star rating maintained across 20+ completed projects</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="tl-date">2020 — 2025</div>
+      <div>
+        <div class="tl-role">Social Media Manager &amp; Content Creator</div>
+        <div class="tl-company">Personal Brand · Remote</div>
+        <ul class="tl-bullets">
+          <li>Grew combined following to 50K+ across YouTube, Instagram, and Facebook</li>
+          <li>60% growth in audience engagement through data-driven strategy</li>
+          <li>100+ thumbnails and graphics achieving above-average platform engagement</li>
+          <li>Weekly video content: intros, outros, transitions, motion graphics</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="tl-date">2021 — 2025</div>
+      <div>
+        <div class="tl-role">Brand Representative</div>
+        <div class="tl-company">Under Armour · FLAME University, Kanpur</div>
+        <ul class="tl-bullets">
+          <li>Promoted brand values through campus events and social campaigns</li>
+          <li>Created visual content and promotional materials for campus activations</li>
+          <li>Built brand awareness within student community through targeted engagement</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="tl-date">2024 — 2027</div>
+      <div>
+        <div class="tl-role">BA Psychology (Expected 2027)</div>
+        <div class="tl-company">FLAME University · Kanpur, Uttar Pradesh · GPA: 3.8/4.0</div>
+        <ul class="tl-bullets">
+          <li>Coursework: Web Development, Digital Media Production, Visual Design, Computer Science</li>
+          <li>Applying human psychology principles to UX, content strategy, and audience growth</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <div class="section-label">Recognition</div>
+  <h2 class="section-title reveal">ACHIEVEMENTS</h2>
+  <div class="ach-grid reveal">
+    <div class="ach-card">
+      <div class="ach-icon">UA</div>
+      <div class="ach-title">Under Armour Brand Ambassador</div>
+      <div class="ach-sub">Selected to represent brand values and engage the campus community</div>
+    </div>
+    <div class="ach-card">
+      <div class="ach-icon">100K</div>
+      <div class="ach-title">Content Milestone</div>
+      <div class="ach-sub">Achieved 100K+ views on personal content channels</div>
+    </div>
+    <div class="ach-card">
+      <div class="ach-icon">ACP</div>
+      <div class="ach-title">Adobe Certified Professional</div>
+      <div class="ach-sub">Certified in Premiere Pro and Photoshop by Adobe</div>
+    </div>
+    <div class="ach-card">
+      <div class="ach-icon">5★</div>
+      <div class="ach-title">Client Satisfaction</div>
+      <div class="ach-sub">Maintained 5-star rating across 20+ freelance projects</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label reveal">Let's Work Together</div>
+  <div class="contact-big reveal">GET IN<br><span>TOUCH</span></div>
+  <div class="contact-email reveal">shauryasinghcr07@gmail.com</div>
+  <div class="contact-links reveal">
+    <a href="mailto:shauryasinghcr07@gmail.com" class="contact-link">Email</a>
+    <a href="https://linkedin.com/in/yourprofile" class="contact-link" target="_blank">LinkedIn</a>
+    <a href="https://portfolio.com" class="contact-link" target="_blank">Portfolio</a>
+    <a href="tel:+919532551448" class="contact-link">+91 95325 51448</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-copy">© 2026 Shaurya Pratap Singh. All rights reserved.</div>
+  <div class="footer-brand">SPS</div>
+</footer>
+
+<script>
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+function animCursor() {
+  cursor.style.transform = `translate(${mx - 4}px, ${my - 4}px)`;
+  rx += (mx - rx) * 0.12;
+  ry += (my - ry) * 0.12;
+  ring.style.transform = `translate(${rx - 16}px, ${ry - 16}px)`;
+  requestAnimationFrame(animCursor);
+}
+animCursor();
+document.querySelectorAll('a, button, .service-card, .project-card, .ach-card, .skill-tag').forEach(el => {
+  el.addEventListener('mouseenter', () => { ring.style.width = '48px'; ring.style.height = '48px'; ring.style.opacity = '1'; });
+  el.addEventListener('mouseleave', () => { ring.style.width = '32px'; ring.style.height = '32px'; ring.style.opacity = '0.5'; });
+});
+
+const obs = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 80);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
